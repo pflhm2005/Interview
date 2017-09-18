@@ -50,7 +50,7 @@
 
 #### 6.DOM事件的绑定的几种方式
 
-​	addEventListener?
+​	DOM0:onclick/DOM2,3:addEventListener
 
 #### 7.说一下你项目中用到的技术栈，以及觉得得意和出色的点，以及让你头疼的点，怎么解决的。
 
