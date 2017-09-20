@@ -50,11 +50,13 @@
 
 #### 6.DOM事件的绑定的几种方式
 
-​	DOM0:onclick/DOM2,3:addEventListener
+​	DOM0 => onclick	
+
+​	DOM2,3 => addEventListener(可以设定捕获与冒泡)
 
 #### 7.说一下你项目中用到的技术栈，以及觉得得意和出色的点，以及让你头疼的点，怎么解决的。
 
-​	略
+​	略略略
 
 #### 8.有没有了解http2.0,websocket,https，说一下你的理解以及你所了解的特性。
 
@@ -84,7 +86,7 @@
 
 #### 3.我看到你的webpack配置用到webpack.optimize.UglifyJsPlugin这个插件，有没有觉得压缩速度很慢，有什么办法提升速度。
 
-​	指令webpack-p默认调用该压缩插件，开发模式下一般不进行压缩，另外可以利用vendor来分离公共框架JS。
+​	指令webpack-p默认调用该压缩插件，开发模式下一般不进行压缩，另外可以利用vendor来分离公共JS框架。
 
 #### 4.简历上看见你了解http协议。说一下200和304的理解和区别
 
@@ -100,7 +102,9 @@
 
 #### 6.说一下你平时怎么解决跨域的。以及后续JSONP的原理和实现以及cors怎么设置。
 
-​	1、后台解决，设置允许跨域
+​	CORS：http://www.ruanyifeng.com/blog/2016/04/cors.html
+
+​	1、后台解决，设置允许跨域或者白名单
 
 ​	2、用node写个反向代理
 
@@ -168,7 +172,9 @@ jQuery.extend = function() {
 
 #### 1.有没有自己写过webpack的loader,他的原理以及啥的，记得也不太清楚。
 
-​	不懂
+​	http://blog.csdn.net/qiqingjin/article/details/72496554
+
+​	学习中
 
 #### 2.有没有去研究webpack的一些原理和机制，怎么实现的。
 
@@ -183,6 +189,8 @@ jQuery.extend = function() {
 #### 3.babel把ES6转成ES5或者ES3之类的原理是什么，有没有去研究
 
 ​	https://zhuanlan.zhihu.com/p/27289600
+
+​	https://github.com/thejameskyle/the-super-tiny-compiler/blob/master/the-super-tiny-compiler.js
 
 ​	学习中
 
