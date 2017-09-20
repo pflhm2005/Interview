@@ -120,6 +120,10 @@
 
 ​	2、尾递归
 
+​	（此处尾递归实例有误）
+
+​	**尾递归定义**：如果一个函数中所有递归形式的调用都出现在函数的末尾，我们称这个递归函数是尾递归的。
+
 ​	代码可见jQuery源码中的extend函数，第一个参数为true即为深拷贝。
 
 ```javascript
@@ -169,6 +173,10 @@ jQuery.extend = function() {
 #### 2.有没有去研究webpack的一些原理和机制，怎么实现的。
 
 ​	https://github.com/youngwind/blog/issues/99
+
+​	http://www.cnblogs.com/yxy99/p/5852987.html
+
+​	http://blog.csdn.net/qiqingjin/article/details/60579258
 
 ​	学习中
 
