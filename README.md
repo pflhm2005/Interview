@@ -52,7 +52,7 @@
 
 ​	DOM0 => onclick	
 
-​	DOM2,3 => addEventListener(可以设定捕获与冒泡)
+​	DOM2,3 => addEventListener(可以设定捕获与冒泡、一个DOM可绑定多个同类事件)
 
 #### 7.说一下你项目中用到的技术栈，以及觉得得意和出色的点，以及让你头疼的点，怎么解决的。
 
@@ -61,6 +61,8 @@
 #### 8.有没有了解http2.0,websocket,https，说一下你的理解以及你所了解的特性。
 
 ​	http2.0：https://www.zhihu.com/question/34074946
+
+​	优化体现在：多路复用、头部压缩、服务器推送
 
 ​	websocket：https://www.zhihu.com/question/20215561
 
@@ -81,6 +83,8 @@
 #### 2.我看到你的项目用到了Babel的一个插件：transform-runtime以及stage-2，你说一下他们的作用。
 
 ​	transform-runtime：https://segmentfault.com/q/1010000005596587?from=singlemessage&isappinstalled=1
+
+​					http://babeljs.io/docs/plugins/transform-runtime/
 
 ​	stage-2：http://www.cnblogs.com/chris-oil/p/5717544.html
 
