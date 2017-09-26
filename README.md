@@ -82,11 +82,15 @@
 
 #### 2.我看到你的项目用到了Babel的一个插件：transform-runtime以及stage-2，你说一下他们的作用。
 
-​	transform-runtime：https://segmentfault.com/q/1010000005596587?from=singlemessage&isappinstalled=1
+​	transform-runtime：
 
-​					http://babeljs.io/docs/plugins/transform-runtime/
+https://segmentfault.com/q/1010000005596587?from=singlemessage&isappinstalled=1
 
-​	stage-2：http://www.cnblogs.com/chris-oil/p/5717544.html
+​http://babeljs.io/docs/plugins/transform-runtime/
+
+​	stage-2：
+
+http://www.cnblogs.com/chris-oil/p/5717544.html
 
 #### 3.我看到你的webpack配置用到webpack.optimize.UglifyJsPlugin这个插件，有没有觉得压缩速度很慢，有什么办法提升速度。
 
