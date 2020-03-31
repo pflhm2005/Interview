@@ -1,7 +1,7 @@
 - H5性能优化
 1. 大图片压缩 1x/2x/3x => 压缩3x、安卓替换成webp、ios替换成png
 2. 异步加载非首屏数据，懒加载非首屏图片 => stateCallback
-3. 移除无用包(线上编译通过eslint检测unused)，使用公共离线包。
+3. package.json移除无用包(线上编译通过eslint检测unused)，使用公共离线包。
 4. 离线包 => react、react-dom等公共JS库直接在html中使用CDN链接，数据包接入离线包。
 5. 数据预加载，schema加上预请求接口，通过jsb快速获取数据
 
@@ -39,5 +39,6 @@ devServer: {
 1. babel-plugin-import 按需引入组件
 具体原理 将整个库的引用转换为单个模块的引入
 import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
+如果只是单纯的import {xxx} from 'xxx'是不会得到优化的
 2. ScriptExtHtmlWebpackPlugin可以强化HtmlWebpackPlugin插件 => 比如给script标签添加属性或设置为async
 3. 多entry的webpack，通过cacheGroups的配置将特殊库(比如echarts)单独拆分出来
