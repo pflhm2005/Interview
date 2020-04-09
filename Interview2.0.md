@@ -42,3 +42,14 @@ import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
 如果只是单纯的import {xxx} from 'xxx'是不会得到优化的
 2. ScriptExtHtmlWebpackPlugin可以强化HtmlWebpackPlugin插件 => 比如给script标签添加属性或设置为async
 3. 多entry的webpack，通过cacheGroups的配置将特殊库(比如echarts)单独拆分出来
+
+### 平安二面
+- 无CDN如何解决高并发
+- 如何做页面白屏的优化，具体的措施
+- 头条内部工具有什么不足的地方，指出来
+- 有自己做过架构方面的事吗
+- 对webpack、vue了解如何，说说原理
+- 对PC端兼容有什么看法
+- 移动端和H5通信过程，JSB的原理
+- 与服务端联调过程，如何上线的
+- 安全方面有做过吗
