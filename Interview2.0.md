@@ -53,3 +53,4 @@ import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
 - 移动端和H5通信过程，JSB的原理
 - 与服务端联调过程，如何上线的
 - 安全方面有做过吗
+- 有写过公共组件吗，过程，测试用例怎么写的
