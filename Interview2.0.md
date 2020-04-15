@@ -43,6 +43,8 @@ import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
 2. ScriptExtHtmlWebpackPlugin可以强化HtmlWebpackPlugin插件 => 比如给script标签添加属性或设置为async
 3. 多entry的webpack，通过cacheGroups的配置将特殊库(比如echarts)单独拆分出来
 
+<!-- # 面试记录(目前全挂，哈哈哈哈) -->
+
 ### 平安二面
 - 无CDN如何解决高并发
 - 如何做页面白屏的优化，具体的措施
@@ -54,3 +56,39 @@ import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
 - 与服务端联调过程，如何上线的
 - 安全方面有做过吗
 - 有写过公共组件吗，过程，测试用例怎么写的
+
+### 阿里电话面(挂)
+
+- 从url中输出taobao.com到页面出来发生了什么
+
+**计算机网络确实是弱项，力争最详细解释**
+
+主流程如下
+
+1. DNS查询
+> DNS全称Domain Name System，主要是将域名转换为数字IP地址以便计算机服务定位。
+- 检查域名是否在缓存中，如果有直接返回(chrome是chrome://net-internals/#dns)
+- 缓存没有从本地的Host文件中找，mac电脑是/etc/hosts，形式类似于127.0.0.1  localhost
+- 上述两个没有找到，会发送DNS查询给DNS服务器。DNS会优先发送基于UDP的请求(端口53)，原因是DNS查询只是单个的UDP请求与响应，不存在多个、有序等特征，仅当返回结果长度大于512bytes(DNS messages carried by UDP were restricted to 512 bytes)且服务端、客户端不支持EDNS的情况下，才会再次通过TCP发送DNS查询
+- DNS服务器是树结构，查询请求到达根服务时，不会直接响应结果，而是会转给子服务。按照提问的```www.taobao.com```，首先会转给com服务，之后会反复重复这个过程直到返回最终结果。
+- 如果查询局域网的内容，对进行ARP查询(待完善)
+
+
+2. TCP握手
+
+- 获取目标服务器IP地址、端口号后，开始封装TCP请求。
+- 首先请求交给传输层，封装成TCP分片，头部加入目标端口和源端口
+- 接下来交给网络层，加入目标服务器的IP地址以及本机IP地址，封装成IP数据包
+- 接下来进入链路层，加入MAC地址。
+- 
+
+### 虾皮一面
+
+- 原型链
+- 无bind实现call函数
+- 判断对象是否由new调用
+
+### 腾讯微视一面
+
+- H5的优化、node使用
+- 笔试题实现驼峰化、sleep函数、节流函数
