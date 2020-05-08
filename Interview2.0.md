@@ -1,5 +1,5 @@
 - H5性能优化
-1. 大图片压缩 1x/2x/3x => 压缩3x、安卓替换成webp、ios替换成png
+1. 大图片压缩 1x/2x/3x => 压缩3x、安卓替换成webp、ios替换成jpg
 2. 异步加载非首屏数据，懒加载非首屏图片 => stateCallback
 3. package.json移除无用包(线上编译通过eslint检测unused)，使用公共离线包。
 4. 离线包 => react、react-dom等公共JS库直接在html中使用CDN链接，数据包接入离线包。
