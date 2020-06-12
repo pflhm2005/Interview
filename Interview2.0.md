@@ -113,14 +113,6 @@ TIP:断开连接
 - 304 => 代表内容无改变，可以使用缓存内容，此时虽然有通信，但服务端并未返回任何内容
 - 相关缓存知识自行查询
 
-5.状态响应
-
-- 通过HTTP/HTTPS等协议进行通信，服务端会返回一个响应状态码
-- 200 => 代表请求成功，返回新的内容。通过缓存返回则会有一个标识，即200(from disk cache) or 200(from memory cache)
-- 304 => 代表内容无改变，可以使用缓存内容，此时虽然有通信，但服务端并未返回任何内容
-- 相关缓存知识自行查询
-
-vscode://vscode.github-authentication/did-authenticate?windowId=1&code=0fc5d7b7596f139152d5&state=5a49e7ed-7d05-4ee1-91ca-b6c756dc48d1
 ### 虾皮一面
 
 - 原型链
