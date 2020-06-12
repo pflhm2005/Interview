@@ -38,12 +38,25 @@ devServer: {
 - webpack优化
 1. babel-plugin-import 按需引入组件
 具体原理 将整个库的引用转换为单个模块的引入
-import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
+import {Buttom} from 'antd' => import _Buttom from 'antd/lib/button';
 如果只是单纯的import {xxx} from 'xxx'是不会得到优化的
 2. ScriptExtHtmlWebpackPlugin可以强化HtmlWebpackPlugin插件 => 比如给script标签添加属性或设置为async
 3. 多entry的webpack，通过cacheGroups的配置将特殊库(比如echarts)单独拆分出来
 
+---
+
 <!-- # 面试记录(目前全挂，哈哈哈哈) -->
+
+### 虾皮一面
+
+- 原型链
+- 无bind实现call函数
+- 判断对象是否由new调用
+
+### 腾讯微视一面
+
+- H5的优化、node使用
+- 笔试题实现驼峰化、sleep函数、节流函数
 
 ### 平安二面
 - 无CDN如何解决高并发
@@ -117,27 +130,4 @@ TIP:断开连接
 
 - 解析HTML、CSS、JS
 - 构建 DOM 树 -> 渲染 -> 布局 -> 绘制
-
-### 虾皮一面
-
-- 原型链
-- 无bind实现call函数
-- 判断对象是否由new调用
-
-### 腾讯微视一面
-
-- H5的优化、node使用
-- 笔试题实现驼峰化、sleep函数、节流函数
-录(目前全挂，哈哈哈哈) -->
-
-### 平安二面
-- 无CDN如何解决高并发
-- 如何做页面白屏的优化，具体的措施
-- 头条内部工具有什么不足的地方，指出来
-- 有自己做过架构方面的事吗
-- 对webpack、vue了解如何，说说原理
-- 对PC端兼容有什么看法
-- 移动端和H5通信过程，JSB的原理
-- 与服务端联调过程，如何上线的
-- 安全方面有做过吗
-- 有写过公共组件吗，过程，测试用例怎么写的
+待续……
