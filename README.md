@@ -6,18 +6,20 @@
 5. 数据预加载，schema加上预请求接口，通过jsb快速获取数据
 
 - 移动端开发
-1. 低版本安卓1px不显示，需要1.05px
+1. 低版本安卓1px偶尔不显示，需要1.05px
 2. 低版本chrome内核无法用line-height垂直居中，需要用绝对定位+scale
 3. 横向滚动条最右边的dom右边距不生效，需要插一个空dom
 4. ipx需要做底部兼容
 5. 刘海屏需要对status做兼容处理
 6. IOS默认带有弹性滚动，需要做兼容处理
 7. 指定行文案css
+```css
 overflow: hidden;
 text-overflow: ellipsis;
 -webkit-box-orient: vertical;
 display: -webkit-box;
 -webkit-line-clamp: 1;
+```
 8. 图层不显示的问题 => 加上transform: translate3d(0, 0, 0)
 9. 页面渲染与代码不同步 => 改变opacity会强制重绘
 10. 一般h5自带flexible，自动会将px转为rem，但是需要注意的是行内样式不会转换，另外PX也会被忽略
