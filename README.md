@@ -1,259 +1,143 @@
-# 面试题答案
-
-
-
-### 摘抄某草榴大神的github面试题目，将答案整理如下。
-
-来源：https://github.com/jawil/blog/issues/22
-
-
-
-## 一
-
-
-
-#### 1.说一下你了解CSS盒模型。
-
-​	content-box/border-box两种盒模型，影响width的计算方式
-
-#### 2.说一下box-sizing的应用场景。
-
-​	样式格式化，统一规范
-
-#### 3.说一下你了解的弹性FLEX布局.
-
-​	http://blog.csdn.net/magneto7/article/details/70854472
-
-#### 4.说一下一个未知宽高元素怎么上下左右垂直居中。
-
-​	1、table-cell
-
-​	2、transform
-
-​	3、flex
-
-#### 5.说一下原型链，对象，构造函数之间的一些联系。
-
-​	原型链主要是JS属性值获取的特性，如果在本对象查到不到，会在原型上继续查找，直到遍历完整条原型。
-
-​	构造函数的本质也是普通函数，特点在于new操作符，这里简述new操作符的工作：
-
-​	1、创建一个全新的对象。
-
-​	2、这个新对象会被执行【原型】连接。
-
-​	3、这个新对象会绑定到函数调用的this。
-
-​	4、如果函数没有返回其他对象，那么new表达式中的函数调用会自动返回这个新对象。
-
-​	推荐阅读《你不知道的Javascript》系列书籍。
-
-#### 6.DOM事件的绑定的几种方式
-
-​	DOM0 => onclick	
-
-​	DOM2,3 => addEventListener(可以设定捕获与冒泡、一个DOM可绑定多个同类事件)
-
-#### 7.说一下你项目中用到的技术栈，以及觉得得意和出色的点，以及让你头疼的点，怎么解决的。
-
-​	略略略
-
-#### 8.有没有了解http2.0,websocket,https，说一下你的理解以及你所了解的特性。
-
-​	http2.0：https://www.zhihu.com/question/34074946
-
-​	优化体现在：多路复用、头部压缩、服务器推送
-
-​	websocket：https://www.zhihu.com/question/20215561
-
-​	https在http的外面包了一个SSL层，主要目的是数据传输安全 ，见：
-
-​	http://www.cnblogs.com/wqhwe/p/5407468.html
-
-
-
-## 二
-
-
-
-#### 1.webpack的入口文件怎么配置，多个入口怎么分割啥的，我也没太听清楚。
-
-​	webpack相关知识：http://www.jqhtml.com/7626.html
-
-#### 2.我看到你的项目用到了Babel的一个插件：transform-runtime以及stage-2，你说一下他们的作用。
-
-​	transform-runtime：
-
-https://segmentfault.com/q/1010000005596587?from=singlemessage&isappinstalled=1
-
-​http://babeljs.io/docs/plugins/transform-runtime/
-
-​	stage-2：
-
-http://www.cnblogs.com/chris-oil/p/5717544.html
-
-#### 3.我看到你的webpack配置用到webpack.optimize.UglifyJsPlugin这个插件，有没有觉得压缩速度很慢，有什么办法提升速度。
-
-​	指令webpack-p默认调用该压缩插件，开发模式下一般不进行压缩，另外可以利用vendor来分离公共JS框架。
-
-#### 4.简历上看见你了解http协议。说一下200和304的理解和区别
-
-​	强缓存与协商缓存：http://www.cnblogs.com/wonyun/p/5524617.html
-
-#### 5.DOM事件中target和currentTarget的区别
-
-> target指向事件触发源
-
-> currentTatget指向事件绑定DOM
-
-​	vue中事件修饰符self的内部实现即通过判断event.target === event.currentTarget来实现。
-
-#### 6.说一下你平时怎么解决跨域的。以及后续JSONP的原理和实现以及cors怎么设置。
-
-​	CORS：http://www.ruanyifeng.com/blog/2016/04/cors.html
-
-​	1、后台解决，设置允许跨域或者白名单
-
-​	2、用node写个反向代理
-
-​	JSONP原理是利用浏览器默认允许的跨服方式script标签进行请求。
-
-#### 7.说一下深拷贝的实现原理。
-
-​	1、使用JSON.stringify与JSON.parse实现
-
-​	优点：简单方便
-
-​	缺点：需要严格符合JSON格式，并且无法拷贝循环引用
-
-​	循环引用有一个插件：https://github.com/douglascrockford/JSON-js/blob/master/cycle.js
-
-​	内部实现原理是用ES6的WeakMap保存对象，键为对象，值为对象的路径，如果遇到重复的，使用特殊符号$+路径替换掉。
-
-​	2、尾递归
-
-​	（此处尾递归实例有误）
-
-​	**尾递归定义**：如果一个函数中所有递归形式的调用都出现在函数的末尾，我们称这个递归函数是尾递归的。
-
-​	代码可见jQuery源码中的extend函数，第一个参数为true即为深拷贝。
-
-```javascript
-jQuery.extend = function() {
-  // 参数修正及变量定义
-  for (; i < length; i++) {
-    if ((options = arguments[i]) != null) {
-      for (name in options) {
-        src = target[name];
-        copy = options[name];
-        if (target === copy) {
-          continue;
-        }
-        if (deep && copy && (jQuery.isPlainObject(copy) ||
-                             (copyIsArray = Array.isArray(copy)))) {
-          if (copyIsArray) {
-            copyIsArray = false;
-            clone = src && Array.isArray(src) ? src : [];
-          } else {
-            clone = src && jQuery.isPlainObject(src) ? src : {};
-          }
-          target[name] = jQuery.extend(deep, clone, copy);
-        } else if (copy !== undefined) {
-          target[name] = copy;
-        }
-      }
+- H5性能优化
+1. 大图片压缩 1x/2x/3x => 压缩3x、安卓替换成webp、ios替换成jpg
+2. 异步加载非首屏数据，懒加载非首屏图片 => stateCallback
+3. package.json移除无用包(线上编译通过eslint检测unused)，使用公共离线包。
+4. 离线包 => react、react-dom等公共JS库直接在html中使用CDN链接，数据包接入离线包。
+5. 数据预加载，schema加上预请求接口，通过jsb快速获取数据
+
+- 移动端开发
+1. 低版本安卓1px不显示，需要1.05px
+2. 低版本chrome内核无法用line-height垂直居中，需要用绝对定位+scale
+3. 横向滚动条最右边的dom右边距不生效，需要插一个空dom
+4. ipx需要做底部兼容
+5. 刘海屏需要对status做兼容处理
+6. IOS默认带有弹性滚动，需要做兼容处理
+7. 指定行文案css
+overflow: hidden;
+text-overflow: ellipsis;
+-webkit-box-orient: vertical;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+8. 图层不显示的问题 => 加上transform: translate3d(0, 0, 0)
+9. 页面渲染与代码不同步 => 改变opacity会强制重绘
+10. 一般h5自带flexible，自动会将px转为rem，但是需要注意的是行内样式不会转换，另外PX也会被忽略
+
+- 调试
+1. SSR的开发，使用本地json文件
+2. 跨域用webpack反向代理
+devServer: {
+    proxy: {
+      '/xxx/\*\*': {
+        target: 'xxx',
+        changeOrigin: true,
+      },
     }
-  }
-  return target;
-};
-```
-
-#### 8.说一下项目中觉得可以改进的地方以及做的很优秀的地方？
-
-​	略
-
-
-
-## 三
-
-
-
-#### 1.有没有自己写过webpack的loader,他的原理以及啥的，记得也不太清楚。
-
-​	http://blog.csdn.net/qiqingjin/article/details/72496554
-
-​	学习中
-
-#### 2.有没有去研究webpack的一些原理和机制，怎么实现的。
-
-​	https://github.com/youngwind/blog/issues/99
-
-​	http://www.cnblogs.com/yxy99/p/5852987.html
-
-​	http://blog.csdn.net/qiqingjin/article/details/60579258
-
-​	学习中
-
-#### 3.babel把ES6转成ES5或者ES3之类的原理是什么，有没有去研究
-
-​	https://zhuanlan.zhihu.com/p/27289600
-
-​	https://github.com/thejameskyle/the-super-tiny-compiler/blob/master/the-super-tiny-compiler.js
-
-​	学习中
-
-#### 4.git大型项目的团队合作，以及持续集成啥的。
-
-​	不懂
-
-#### 5.什么是函数柯里化？以及说一下JS的API有哪些应用到了函数柯里化的实现？
-
-> 柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求
-
-
-​	可参考vue中bind函数的实现：
-
-```javascript
-function bind(fn, ctx) {
-  function boundFn(a) {
-    var l = arguments.length;
-    return l ?
-      l > 1 ?
-      fn.apply(ctx, arguments) :
-    fn.call(ctx, a) :
-    fn.call(ctx)
-  }
-  // record original fn length
-  boundFn._length = fn.length;
-  return boundFn
 }
-```
+3. 联调利用抓包工具Charles，主要是看接口请求与相应
 
-#### 6.ES6的箭头函数this问题，以及拓展运算符。
+- webpack优化
+1. babel-plugin-import 按需引入组件
+具体原理 将整个库的引用转换为单个模块的引入
+import {Buttom} from 'antd' => import \_Buttom from 'antd/lib/button';
+如果只是单纯的import {xxx} from 'xxx'是不会得到优化的
+2. ScriptExtHtmlWebpackPlugin可以强化HtmlWebpackPlugin插件 => 比如给script标签添加属性或设置为async
+3. 多entry的webpack，通过cacheGroups的配置将特殊库(比如echarts)单独拆分出来
 
-> 函数体内的`this`对象，就是定义时所在的对象，而不是使用时所在的对象。
+<!-- # 面试记录(目前全挂，哈哈哈哈) -->
+
+### 平安二面
+- 无CDN如何解决高并发
+- 如何做页面白屏的优化，具体的措施
+- 头条内部工具有什么不足的地方，指出来
+- 有自己做过架构方面的事吗
+- 对webpack、vue了解如何，说说原理
+- 对PC端兼容有什么看法
+- 移动端和H5通信过程，JSB的原理
+- 与服务端联调过程，如何上线的
+- 安全方面有做过吗
+- 有写过公共组件吗，过程，测试用例怎么写的
+
+### 阿里电话面(挂)
+
+- 从url中输出taobao.com到页面出来发生了什么
+
+**计算机网络确实是弱项，力争最详细解释**
+
+主流程如下(内容参考https://github.com/skyline75489/what-happens-when-zh_CN)
+
+1. DNS查询
+> DNS全称Domain Name System，主要是将域名转换为数字IP地址以便计算机服务定位。
+- 检查域名是否在缓存中，如果有直接返回(chrome是chrome://net-internals/#dns)
+- 缓存没有从本地的Host文件中找，mac电脑是/etc/hosts，形式类似于127.0.0.1  localhost
+- 上述两个没有找到，会发送DNS查询给DNS服务器。DNS会优先发送基于UDP的请求(端口53)，原因是DNS查询只是单个的UDP请求与响应，不存在多个、有序等特征，仅当返回结果长度大于512bytes(DNS messages carried by UDP were restricted to 512 bytes)且服务端、客户端不支持EDNS的情况下，才会再次通过TCP发送DNS查询
+- DNS服务器是树结构，查询请求到达根服务时，不会直接响应结果，而是会转给子服务。按照提问的```www.taobao.com```，首先会转给com服务，之后会反复重复这个过程直到返回最终结果。
+- 如果查询局域网的内容，对进行ARP查询(待完善)
 
 
-​	拓展运算符可见阮一峰的书：http://es6.ruanyifeng.com/
+2. TCP封包
 
-#### 7.JS模块化Commonjs,UMD,CMD规范的了解，以及ES6的模块化跟其他几种的区别，以及出现的意义。
+- 获取目标服务器IP地址、端口号后，开始封装TCP请求
+- 首先请求交给传输层，封装成TCP分片，头部加入目标端口和源端口
+- 接下来交给网络层，加入目标服务器的IP地址以及本机IP地址，封装成IP数据包
+- 接下来进入链路层，加入MAC地址
+- TCP封包准备好了后，会从本地计算机出发，经过多个路由器，每个路由器会从包中提取目标地址，将封包转移到下一个目的地。每经过一个路由器，包头部的TTL值都会减1，到0时这个包会被丢弃
 
-​	http://blog.csdn.net/Real_Bird/article/details/54869066
+3. 建立TCP连接
+> TCP是网络协议簇中的一个，最初是为了补充IP协议，因此整个簇一般被统称为TCP/IP。TCP提供可靠、有序、错误检查的连接，位于传输层，SSL/TLS在其之上，与之对比的是UDP。
+- TCP的头部字段与连接相关的有Sequence number、ACK(Acknowledgment number)确认号，SYN(Synchronize sequence numbers)同步序列号。
+- 服务端首先会开放一个端口并监听，被称为被动打开，之后客户端会通过三次握手来主动打开。
+- SYN => 客户端发送SYN包给服务端，将Sequence number设置为一个随机值，将SYN标记置1
+- SYN-ACK => 服务端接受到包后，返回一个新包，将ACK的值设置为sequence numbers + 1，服务端的包sequence numbers值会为另外一个随机值
+- ACK => 客户端发送一个ACK包给服务端，将sequence numbers设置为ACK的值，ACK的值设置为服务端回包的sequence numbers + 1
 
-#### 8.说一下Vue实现双向数据绑定的原理，以及vue.js和react.js异同点，如果让你选框架，你怎么怎么权衡这两个框架，分析一下。
+妄妄语录：序号并不是从 1 开始的，而是需要用随机数计算出一个初始值，这是因为如果序号都从 1 开始，通信过程就会非常容易预测，有人会利用这一点来发动攻击。但是如果初始值是随机的，那么对方就搞不清楚序号到底是从，多少开始计算的，因此需要在开始收发数据之前将初始值告知通信对象。
 
-​	重新定义对象的setter/getter，并劫持所有破坏性数组方法(push、pop等)。
+TIP:断开连接
 
-​	react源码没看过，虚拟DOM方面是相同的
+- 断开需要四次挥手，这个两边都可以发起
+- 有一端需要结束连接时，会发送一个FIN包
+- 由于服务端会连续发送两个包，分别代表收到断开请求以及所有内容都发送完毕，所以会有四次挥手
 
-#### 9.我看你也写博客，说一下草稿的交互细节以及实现原理。
+4.TLS握手
 
-​	略
+- 客户端发送一个消息到服务端，包含了可用的TLS版本、加密压缩算法
+- 服务端返回一个消息，包含服务端的TLS版本，所选择的加密压缩算法，以及一个CA证书，证书包含了公钥
+- 客户端判断该证书是否可信，如果可信，会生成一个伪随机数，该数被用来生成对称秘钥，使用公钥加密后发送给服务端
+- 服务端用私钥解密后同样生成一个对称秘钥
+- 之后客户端与服务端根据随机数与加密算法生成的秘钥进行通信
 
+5.状态响应
 
+- 通过HTTP/HTTPS等协议进行通信，服务端会返回一个响应状态码
+- 200 => 代表请求成功，返回新的内容。通过缓存返回则会有一个标识，即200(from disk cache) or 200(from memory cache)
+- 304 => 代表内容无改变，可以使用缓存内容，此时虽然有通信，但服务端并未返回任何内容
+- 相关缓存知识自行查询
 
+6.资源解析
 
+- 解析HTML、CSS、JS
+- 构建 DOM 树 -> 渲染 -> 布局 -> 绘制
 
+### 虾皮一面
 
+- 原型链
+- 无bind实现call函数
+- 判断对象是否由new调用
 
-​	
+### 腾讯微视一面
+
+- H5的优化、node使用
+- 笔试题实现驼峰化、sleep函数、节流函数
+录(目前全挂，哈哈哈哈) -->
+
+### 平安二面
+- 无CDN如何解决高并发
+- 如何做页面白屏的优化，具体的措施
+- 头条内部工具有什么不足的地方，指出来
+- 有自己做过架构方面的事吗
+- 对webpack、vue了解如何，说说原理
+- 对PC端兼容有什么看法
+- 移动端和H5通信过程，JSB的原理
+- 与服务端联调过程，如何上线的
+- 安全方面有做过吗
+- 有写过公共组件吗，过程，测试用例怎么写的
