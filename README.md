@@ -81,10 +81,12 @@ import {Buttom} from 'antd' => import _Buttom from 'antd/lib/button';
 主流程如下(内容参考https://github.com/skyline75489/what-happens-when-zh_CN)
 
 1. DNS查询
-> DNS全称Domain Name System，主要是将域名转换为数字IP地址以便计算机服务定位。
+> DNS全称Domain Name System，主要是将域名转换为数字IP地址以便计算机服务定位
+- 进行punyCode转码，防止出现特殊的字符hostname
 - 检查域名是否在缓存中，如果有直接返回(chrome是chrome://net-internals/#dns)
 - 缓存没有从本地的Host文件中找，mac电脑是/etc/hosts，形式类似于127.0.0.1  localhost
-- 上述两个没有找到，会发送DNS查询给DNS服务器。DNS会优先发送基于UDP的请求(端口53)，原因是DNS查询只是单个的UDP请求与响应，不存在多个、有序等特征，仅当返回结果长度大于512bytes(DNS messages carried by UDP were restricted to 512 bytes)且服务端、客户端不支持EDNS的情况下，才会再次通过TCP发送DNS查询
+- 上述两步是可选的，node的dns模块中，若使用lookup方法，则查询会优先走上述流程，可能不会与dns服务器进行请求。
+- 发送DNS查询给DNS服务器。DNS会优先发送基于UDP的请求(端口53)，原因是DNS查询只是单个的UDP请求与响应，不存在多个、有序等特征，仅当返回结果长度大于512bytes(DNS messages carried by UDP were restricted to 512 bytes)且服务端、客户端不支持EDNS的情况下，才会再次通过TCP发送DNS查询
 - DNS服务器是树结构，查询请求到达根服务时，不会直接响应结果，而是会转给子服务。按照提问的```www.taobao.com```，首先会转给com服务，之后会反复重复这个过程直到返回最终结果。
 - 如果查询局域网的内容，对进行ARP查询(待完善)
 
