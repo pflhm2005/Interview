@@ -99,6 +99,7 @@ import {Buttom} from 'antd' => import _Buttom from 'antd/lib/button';
 - 接下来交给网络层，加入目标服务器的IP地址以及本机IP地址，封装成IP数据包
 - 接下来进入链路层，加入MAC地址
 - TCP封包准备好了后，会从本地计算机出发，经过多个路由器，每个路由器会从包中提取目标地址，将封包转移到下一个目的地。每经过一个路由器，包头部的TTL值都会减1，到0时这个包会被丢弃
+> 注：这一步可参考node的DNS模块封装TCP请求的过程，具体源码见\deps\cares\src\ares_process.c
 
 3. 建立TCP连接
 > TCP是网络协议簇中的一个，最初是为了补充IP协议，因此整个簇一般被统称为TCP/IP。TCP提供可靠、有序、错误检查的连接，位于传输层，SSL/TLS在其之上，与之对比的是UDP。
