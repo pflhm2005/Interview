@@ -82,13 +82,12 @@ import {Buttom} from 'antd' => import _Buttom from 'antd/lib/button';
 
 1. DNS查询
 > DNS全称Domain Name System，主要是将域名转换为数字IP地址以便计算机服务定位
-- 进行punyCode转码，防止出现特殊的字符hostname
+- 进行punyCode转码，兼容带特殊字符的hostname 例如：吉米.com => xn--9pr835g.com(xn应该是对语言类型的描述)
 - 检查域名是否在缓存中，如果有直接返回(chrome是chrome://net-internals/#dns)
 - 缓存没有从本地的Host文件中找，mac电脑是/etc/hosts，形式类似于127.0.0.1  localhost
-- 上面那一步是可选的，具体实现取决于浏览器。在node的dns模块中，若使用resolve方法，则会始终通过网络执行DNS查询，不走上一步。而dns.lookup方法则纯粹走的系统api => getaddrinfo，不会跟DNS协议产生联系。
+- 上面那一步是可选的，具体实现取决于浏览器(在node的dns模块中，若使用resolve方法，则会始终通过网络执行DNS查询，不走上一步。而dns.lookup方法则纯粹走的系统api => getaddrinfo，不会跟DNS协议产生联系)
 - 发送DNS查询给DNS服务器。DNS会优先发送基于UDP的请求(端口53)，原因是DNS查询只是单个的UDP请求与响应，不存在多个、有序等特征，仅当请求包体积长度大于512bytes(DNS messages carried by UDP were restricted to 512 bytes)且服务端、客户端不支持EDNS的情况下，才会再次通过TCP发送DNS查询
 - DNS服务器是树结构，查询请求到达根服务时，不会直接响应结果，而是会转给子服务。按照提问的```www.taobao.com```，首先会转给com服务，之后会反复重复这个过程直到返回最终结果。
-- 如果查询局域网的内容，对进行ARP查询(待完善)
 > 注: edns协议的请求体也有上限 => #define EDNSPACKETSZ   1280  /* Reasonable UDP payload size, as suggested in RFC2671 */
 
 
