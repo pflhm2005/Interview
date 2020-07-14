@@ -82,7 +82,7 @@ import {Buttom} from 'antd' => import _Buttom from 'antd/lib/button';
 
 1. DNS查询
 > DNS全称Domain Name System，主要是将域名转换为数字IP地址以便计算机服务定位
-- 进行punyCode转码，兼容带特殊字符的hostname 例如：吉米.com => xn--9pr835g.com
+- 进行punyCode转码，兼容带特殊字符的hostname，例如：吉米.com => xn--9pr835g.com，xn--为punyCode的特殊标识
 - 检查域名是否在缓存中，如果有直接返回(chrome是chrome://net-internals/#dns)
 - 缓存没有从本地的Host文件中找，mac电脑是/etc/hosts，形式类似于127.0.0.1  localhost
 - 上面那一步是可选的，具体实现取决于浏览器(在node的dns模块中，若使用resolve方法，则会始终通过网络执行DNS查询，不走上一步。而dns.lookup方法则纯粹走的系统api => getaddrinfo，不会跟DNS协议产生联系)
